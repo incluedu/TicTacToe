@@ -5,19 +5,19 @@ public abstract class AbstractRegularGame<M> implements RegularGame, Cloneable {
     /*
      * CONSTANTS
      */
-    final static byte NONE = 0;
+    protected final static byte NONE = 0;
     final static byte ONE = 1;
     final static byte TWO = 22;
 
     /*
      * ATTRIBUTES
      */
-    final byte rows;
-    final byte columns;
+    private final byte rows;
+    private final byte columns;
 
     byte player = ONE;
 
-    byte[][] b;
+    protected byte[][] b;
 
     int movesDone;
     byte lastColumn = -1;
