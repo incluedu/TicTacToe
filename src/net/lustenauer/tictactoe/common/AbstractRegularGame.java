@@ -1,6 +1,6 @@
 package net.lustenauer.tictactoe.common;
 
-public abstract class AbstractRegularGame<M> implements RegularGame, Cloneable {
+public abstract class AbstractRegularGame<M> implements RegularGame<M>, Cloneable {
 
     /*
      * CONSTANTS
@@ -12,14 +12,14 @@ public abstract class AbstractRegularGame<M> implements RegularGame, Cloneable {
     /*
      * ATTRIBUTES
      */
-    private final byte rows;
-    private final byte columns;
+    protected final byte rows;
+    protected final byte columns;
 
-    byte player = ONE;
+    protected byte player = ONE;
 
     protected byte[][] b;
 
-    int movesDone;
+    protected int movesDone;
     byte lastColumn = -1;
     byte lastRow = -1;
 

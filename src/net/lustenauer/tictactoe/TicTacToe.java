@@ -25,35 +25,87 @@ public class TicTacToe extends AbstractRegularGame<Pair<Byte, Byte>> {
     @Override
     public List moves() {
         List<Pair<Byte, Byte>> result = new LinkedList<>();
-        for (byte c = 0; c < getColumns(); c++){
-            for (byte r = 0; r<getRows();r++){
-                if(b[c][r] == NONE){
-                   result.add(new Pair<>(c,r));
+        for (byte c = 0; c < getColumns(); c++) {
+            for (byte r = 0; r < getRows(); r++) {
+                if (b[c][r] == NONE) {
+                    result.add(new Pair<>(c, r));
                 }
             }
         }
-            return result;
+        return result;
     }
 
-    // TODO: 13.02.2018 weitermachen bei kapitel 9.3.4
 
     @Override
-    public TicTacToe doMove(Object o) {
+    public TicTacToe doMove(Pair<Byte, Byte> m) {
+        TicTacToe result = clone();
+        result.player = nextPlayer();
+        result.b[m.first][m.second] = player;
+        result.movesDone = (byte) (movesDone++);
         return null;
     }
 
     @Override
     public boolean noMoreMove() {
-        return false;
+        return rows * columns >= movesDone;
     }
 
     @Override
     public boolean wins(byte player) {
-        return false;
+        return checkRows(player) || checkColumns(player) || checkDiagonal1(player) || checkDiagonal2(player);
     }
+
 
     @Override
     public int evalState(byte player) {
+        if (wins()) {
+            return (lastPlayer() == player) ? Integer.MAX_VALUE : -Integer.MAX_VALUE;
+        }
         return 0;
     }
+
+    @Override
+    public TicTacToe clone() {
+        return (TicTacToe) super.clone();
+    }
+
+    /*
+     * PRIVATE METHODS
+     */
+    private boolean checkRows(byte player) {
+        for (byte r = 0; r < rows; r++) {
+            for (byte c = 0; c < columns; c++) {
+                if (b[c][r] != player) break;
+                if (c == columns - 1) return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkColumns(byte player) {
+        for (byte c = 0; c < columns; c++) {
+            for (byte r = 0; r < rows; r++) {
+                if (b[c][r] != player) break;
+                if (c == rows - 1) return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkDiagonal1(byte player) {
+        for (byte r = 0; r < rows; r++) {
+            if (b[r][r] != player) break;
+            if (r == rows - 1) return true;
+        }
+        return false;
+    }
+
+    private boolean checkDiagonal2(byte player) {
+        for (byte r = 0; r < rows; r++) {
+            if (b[r][rows - r - 1] != player) break;
+            if (r == rows - 1) return true;
+        }
+        return false;
+    }
+
 }
