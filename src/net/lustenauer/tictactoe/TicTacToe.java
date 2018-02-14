@@ -10,8 +10,8 @@ public class TicTacToe extends AbstractRegularGame<Pair<Byte, Byte>> {
     /*
      * CONSTRUCTORS
      */
-    public TicTacToe(byte rows, byte columns) {
-        super(rows, columns);
+    public TicTacToe() {
+        super((byte) 3, (byte) 3);
     }
 
     /*
@@ -42,7 +42,7 @@ public class TicTacToe extends AbstractRegularGame<Pair<Byte, Byte>> {
         result.player = nextPlayer();
         result.b[m.first][m.second] = player;
         result.movesDone = (byte) (movesDone++);
-        return null;
+        return result;
     }
 
     @Override

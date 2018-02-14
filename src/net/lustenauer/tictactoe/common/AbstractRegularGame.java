@@ -28,6 +28,7 @@ public abstract class AbstractRegularGame<M> implements RegularGame<M>, Cloneabl
     public AbstractRegularGame(byte rows, byte columns) {
         this.rows = rows;
         this.columns = columns;
+        b = new byte[columns][];
         for (int i = 0; i < columns; i++) b[i] = new byte[rows];
     }
 
